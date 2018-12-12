@@ -29,7 +29,7 @@ Upgrading
 
 1. On the Splunk toolbar, select **Apps > Manage Apps**.
 2. Find the Broken Hosts App for Splunk.
-3. Under the Version column, select **Update to 4.0.1**.
+3. Under the Version column, select **Update to 4.0.x**.
 4. Follow the prompts and, if necessary, restart Splunk.
 5. Follow any version-specific upgrade instructions below.
 
