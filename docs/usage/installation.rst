@@ -33,8 +33,8 @@ Upgrading
 4. Follow the prompts and, if necessary, restart Splunk.
 5. Follow any version-specific upgrade instructions below.
 
-Upgrading to 4.0.1
-~~~~~~~~~~~~~~~~~~
+Upgrading to 4.0.x from 3.x or below
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Starting with Broken Hosts 4.0.1, the ``Broken Hosts Sanity Check`` has been split into two
 pieces, neither of which is enabled by default. To restore similar behavior to previous versions,
