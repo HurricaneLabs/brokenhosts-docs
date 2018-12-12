@@ -191,7 +191,7 @@
       </input>
       <chart>
         <search>
-          <query>| tstats prestats=true count where index=$index$ sourcetype=$sourcetype$ host=$host$ by $aggregator$ _time span=4h | append [search index=_internal host=$host$ sourcetype=splunkd component=ShutDownHandler | eval host=if($aggregator$=="host","splunk restart/shutdown on ".host,host) | eval sourcetype=if($aggregator$=="sourcetype","splunk restart/shutdown on ".host,sourcetype)| eval index=if($aggregator$=="index","splunk restart/shutdown on ".host,index)] | timechart count by $aggregator$</query>
+          <query>| tstats prestats=true count where index=$index$ sourcetype=$sourcetype$ host=$host$ by $aggregator$ _time span=4h | append [search index=_internal sourcetype=splunkd component=ShutDownHandler [| metadata type=hosts index=$index$ | search host="$host$" | fields host] | eval host=if("$aggregator$"=="host","splunk restart/shutdown on ".host,host) | eval sourcetype=if("$aggregator$"=="sourcetype","splunk restart/shutdown on ".host,sourcetype)| eval index=if("$aggregator$"=="index","splunk restart/shutdown on ".host,index)] | timechart count by $aggregator$</query>
           <earliest>$investigation.earliest$</earliest>
           <latest>$investigation.latest$</latest>
         </search>

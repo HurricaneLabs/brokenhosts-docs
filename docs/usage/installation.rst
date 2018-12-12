@@ -13,6 +13,12 @@ Note: If you are installing the Broken Hosts App on a search head cluster, follo
 2. In the search box, search for **broken hosts**.
 3. Next to the Broken Hosts App for Splunk, select the **Install** button.
 4. Follow the prompts and, if necessary, restart Splunk.
+5. (Optional, but recommended) - Backfill summary index by running this CLI command:
+
+::
+
+	cd $SPLUNK_HOME/bin && ./splunk cmd python fill_summary_index.py -app broken_hosts -name bh_stats_gen -dedup true -et -30d@d -lt now -j 10 -showprogress true
+
 
 Once the app is installed, please review the :ref:`configuration` documentation.
 
@@ -34,13 +40,19 @@ Starting with Broken Hosts 4.0.1, the ``Broken Hosts Sanity Check`` has been spl
 pieces, neither of which is enabled by default. To restore similar behavior to previous versions,
 follow these steps:
 
-1. Review your ``search_additions`` macro to determine which functionality must occur in the stats
+1. (Optional, but recommended) - Backfill summary index by running this CLI command:
+
+::
+
+	cd $SPLUNK_HOME/bin && ./splunk cmd python fill_summary_index.py -app broken_hosts -name bh_stats_gen -dedup true -et -30d@d -lt now -j 10 -showprogress true
+
+2. Review your ``search_additions`` macro to determine which functionality must occur in the stats
    generation phase, and which must occur in the alert generation phase.
-2. Copy the stats generation parts of your existing ``search_additions`` macro to the new
+3. Copy the stats generation parts of your existing ``search_additions`` macro to the new
    ``bh_stats_gen_additions`` macro.
-3. Copy the alert generation parts of your existing ``search_additions`` macro to the new
+4. Copy the alert generation parts of your existing ``search_additions`` macro to the new
    ``bh_alert_additions`` macro.
-4. Enable the ``Broken Hosts Alert - by contact`` search.
+5. Enable the ``Broken Hosts Alert - by contact`` search.
 
 Afterwards, we recommend reviewing the :ref:`configuration` documentation to get a feel for how
 the new split searches work, and things you can do now with the standalone alerting searches that
